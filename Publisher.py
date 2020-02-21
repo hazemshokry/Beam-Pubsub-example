@@ -1,4 +1,5 @@
-import json, datetime, time, random
+import json, random, time
+from datetime import datetime
 from google.cloud import pubsub_v1
 
 project_id = "hazem-data-engineer"
@@ -39,17 +40,17 @@ def get_location():
 
 
 def get_time():
-    ts_format = '%Y-%m-%d %H:%M:%S.%f UTC'
-    return datetime.datetime.utcnow().strftime(ts_format)
+    ts_format = "%Y-%m-%d %H:%M:%S.000"
+    return datetime.now().strftime(ts_format)
 
 
 if __name__ == '__main__':
     i = 0
-    while (i < 100000):
+    while (i < 1000):
         write_to_pubsub(get_deviceId(),
                         get_temperature(),
                         get_location(),
                         get_time())
 
-        time.sleep(0.2)
+        time.sleep(2)
         i += 1
